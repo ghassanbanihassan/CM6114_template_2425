@@ -1,0 +1,47 @@
+  
+may potentially need to use this somewhere
+for row in grid:
+        print("".join(row))
+
+
+
+    player_position = x, y
+    direction = input("which direction, N/E/S/W?")
+    if direction == "N" or "n" or "north" or "North":
+        new_y, new_x = y, x + 1
+        print("You Moved 1 space North!")
+    elif direction == "E" or "e" or "east" or "East":
+        new_y, new_x = y + 1, x
+        print("You Moved 1 space East!")
+    elif direction == "S" or "s" or "south" or "South":
+        new_y, new_x = y, x - 1
+        print("You Moved 1 space South!")
+    elif direction == "W" or "w" or "west" or "West":
+        new_y, new_x = y - 1, x
+        print("You Moved 1 space West!")
+    else:
+        print("You can only move north, east, south or west.")
+
+#we need to make sure the Merchant isn't moving onto any rocks
+
+# and that the user can't go into the range of the pirate ship
+
+
+grid = setup_game.create_grid(10)
+setup_game.print_grid(grid)
+print(" ")
+difficulty = int(input("choose a difficulty from 1 to 10, with 1 being the hardest. "))
+grid = setup_game.add_rocks(grid, difficulty)
+
+grid, player_position = setup_game.place_player(grid)
+grid, enemy_position = setup_game.place_enemy(grid)
+setup_game.print_grid(grid)
+print(" ")
+print("your position: ", player_position)
+
+direction = player_actions.get_user_direction()
+
+new_player_position = player_actions.get_new_player_position(player_position, direction, grid)
+
+move_player(grid, old_player_position, new_player_position)
+
